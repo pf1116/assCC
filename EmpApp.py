@@ -96,7 +96,7 @@ def Employee():
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(select_sql, ('emp_id': int(emp_id)))
+        cursor.execute(select_sql, {'emp_id': int(emp_id)})
         db_conn.commit()
 
         except Exception as e:
