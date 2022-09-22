@@ -35,22 +35,20 @@
                         <h1>Employee Information</h1>
                     </div>
                     <div class="panel-body">
-                        <form>
-                            <div>
-                                Employee ID:<br> {{ result[0] }} <br><br>
-                                First Name:<br> {{ result[1] }} <br><br>
-                                Last Name:<br> {{ result[2] }} <br><br>
-                                Primary Interest:<br> {{ result[3] }} <br><br>
-                                Location:<br> {{ result[4] }} <br><br>
-                                Image URL: <br> {{ image }}<br><br>
-                                Image : <br> <img width="200px" height="200px" src='{{ image }}'
-                                    alt="Employee Image"></a> <br><br>
+                        <div>
+                            Employee ID:<br> {{ result[0] }} <br><br>
+                            First Name:<br> {{ result[1] }} <br><br>
+                            Last Name:<br> {{ result[2] }} <br><br>
+                            Primary Interest:<br> {{ result[3] }} <br><br>
+                            Location:<br> {{ result[4] }} <br><br>
+                            Image URL: <br> {{ image }}<br><br>
+                            Image : <br> <img width="200px" height="200px" src='{{ image }}' alt="Employee Image"></a>
+                            <br><br>
 
-                                <a href="/getemp">
-                                    <button type="submit" class="btn btn-primary">RESET</button><br><br>
-                                </a>
-                            </div>
-                        </form>
+                            <a href="/getemp">
+                                <button type="submit" class="btn btn-primary">Go Back</button><br><br>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
