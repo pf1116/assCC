@@ -163,7 +163,7 @@ def deleteEmployee():
 
     print("result done...")
     # return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location,image=s3_image_url) 
-      return render_template('DeleteEmpOutput.html', result=result,image=s3_image_url)
+      return render_template('DeleteEmpOutput.html', row=row,image=s3_image_url)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
