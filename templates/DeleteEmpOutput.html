@@ -11,10 +11,9 @@
             background-size: cover;
         }
     </style>
-    <title>Add Emp Output</title>
+    <title>Employee Information</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/emp.css') }}" />
 </head>
-
 
 <body>
     <section class="header">
@@ -33,37 +32,35 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading text-center">
                         <!-- <font color="black" size="4" style="font-family: avenir"> -->
-                        <h1>DELETE SUCCESSFUL</h1><br>
+                        <h1>Employee Information</h1>
                     </div>
                     <div class="panel-body">
+                        <form>
 
+                            <div>
 
-                        <h2>Following Employee has been deleted from the database</h2><br>
-                        <h2>{{ name }}</h2><br>
-                        <form action="http://3.134.115.108:80/" autocomplete="on" method="DELETE">
+                                Employee ID:<br> {{ result[0] }} <br><br>
 
-                            <button type="submit" class="btn btn-primary">GO BACK</button><br><br>
+                                First Name:<br> {{ result[1] }} <br><br>
+
+                                Last Name:<br> {{ result[2] }} <br><br>
+
+                                Primary Interest:<br> {{ result[3] }} <br><br>
+
+                                Location:<br> {{ result[4] }} <br><br>
+
+                                Image URL: <br> {{ image }}<br><br>
+
+                                <a href="/getemp">
+                                    <button type="submit" class="btn btn-primary">RESET</button><br><br>
+                                </a>
+                            </div>
 
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer id="bottom">
-        <div class="footer-content">
-            <h3>CC Employee Management</h3>
-            <p>Welcome to our CC Employee Management</p>
-            <p>Copyright &copy;2022 CC Employee Management.</p>
 
-        </div>
-        <!-- <div class="footer-bottom">
 
-        </div> -->
-    </footer>
 
 
 </body>
-
 
 </html>
