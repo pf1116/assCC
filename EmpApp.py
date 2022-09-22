@@ -119,7 +119,7 @@ def deleteEmp():
     return render_template('DeleteEmp.html')
 
 #Delete Employee Results
-@app.route("/deleteemp/results",methods=['GET','POST'])
+@app.route("/deleteemp/results",methods=['POST'])
 def deleteEmployee():
     emp_id = request.form['emp_id']
     delete_sql = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
@@ -133,6 +133,8 @@ def deleteEmployee():
         #for id in cursor:
         #    print(id)
         db_conn.commit()
+        print("Data deleted from MySQL RDS... deleting image from S3...")
+        boto3.client('s3').delete_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
 
     except Exception as e:
         return str(e)
@@ -141,7 +143,7 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html') #, name=emp_name
+    return render_template('DeleteEmpOutput.html'），#, name=emp_name0) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
