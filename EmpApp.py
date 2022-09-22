@@ -54,7 +54,7 @@ def AddEmp():
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
         s3 = boto3.resource('s3')
 
         try:
@@ -100,6 +100,7 @@ def Employee():
         for result in cursor:
             print(result)
         # db_conn.commit()
+        
         emp_image_file_name_in_s3 = "emp_id"+str(emp_id)+".jpg"
         s3_image_url = "https://limszeyi-employee.s3.amazonaws.com"+emp_image_file_name_in_s3
 
