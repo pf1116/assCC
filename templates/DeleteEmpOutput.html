@@ -37,14 +37,28 @@
                     </div>
                     <div class="panel-body">
 
-
                         <h2>Following Employee has been deleted from the database</h2><br>
-                        <h2>{{ name }}</h2><br>
-                        <form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
+                        <div>
 
-                            <button type="submit" class="btn btn-primary">GO BACK</button><br><br>
+                            Employee ID:<br> {{ result[0] }} <br><br>
 
-                        </form>
+                            First Name:<br> {{ result[1] }} <br><br>
+
+                            Last Name:<br> {{ result[2] }} <br><br>
+
+                            Primary Interest:<br> {{ result[3] }} <br><br>
+
+                            Location:<br> {{ result[4] }} <br><br>
+
+                            Image URL: <br> {{ image }}<br><br>
+
+                            Image : <br> <img width="200px" height="200px" src='{{ image }}' alt="Employee Image"></a>
+                            <br><br>
+
+                            <a href="/deleteemp">
+                                <button type="submit" class="btn btn-primary">Go Back</button><br><br>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
