@@ -110,7 +110,7 @@ def Employee():
         cursor.close()
 
     print("result done...")
-    return render_template('GetEmpOutput.html', result=result,image=emp_image_file)
+    return render_template('GetEmpOutput.html', result=result,image=s3_image_url)
 
 # delete emp
 @app.route("/deleteemp")
