@@ -122,17 +122,26 @@ def deleteEmp():
 @app.route("/deleteemp/results",methods=['POST'])
 def deleteEmployee():
     emp_id = request.form['emp_id']
+    select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql, {'emp_id': int(emp_id)})
+
     delete_sql = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
 
-    cursor = db_conn.cursor()
+    
     if emp_id == "":
         return "Please enter an ID to delete"
 
     try:
         cursor.execute(delete_sql, {'emp_id': int(emp_id)})
-        #for id in cursor:
-        #    print(id)
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
+        s3 = boto3.resource('s3')
+
+        for result in cursor:
+            print(result)
+        fullName = result[1]+""+result[2]
         db_conn.commit()
+        
         print("Data deleted from MySQL RDS... deleting image from S3...")
         boto3.client('s3').delete_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
 
@@ -143,7 +152,7 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html'）
+    return render_template('DeleteEmpOutput.html',name=fullName) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
