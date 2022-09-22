@@ -49,11 +49,12 @@
 
                                 Location:<br> {{ result[4] }} <br><br>
 
-                                 Image URL: <br> {{ image }} <br><br>
-                                
-                                <button type="submit" class="btn btn-primary"
-                                    formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
+                                Image URL: <br> <img width="500px" height="500px" src='{{ image }}'
+                                    alt="Employee Image"></a> <br><br>
 
+                                <a href="/getemp">
+                                    <button type="submit" class="btn btn-primary">RESET</button><br><br>
+                                </a>
                             </div>
 
                         </form>
