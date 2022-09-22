@@ -139,7 +139,7 @@ def deleteEmployee():
 
         for result in cursor:
             print(result)
-        fullName = result[1]+""+result[2]
+
         db_conn.commit()
         
         print("Data deleted from MySQL RDS... deleting image from S3...")
@@ -152,7 +152,7 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html',name=fullName) 
+    return render_template('DeleteEmpOutput.html',result=result) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
