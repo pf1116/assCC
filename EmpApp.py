@@ -100,7 +100,6 @@ def Employee():
         cursor.execute(select_sql, {'emp_id': int(emp_id)})
         for result in cursor:
             print(result)
-        # db_conn.commit()
         
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
         s3_image_url = "https://limszeyi-employee.s3.amazonaws.com/"+emp_image_file_name_in_s3
