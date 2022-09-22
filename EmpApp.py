@@ -91,6 +91,7 @@ def getEmp():
 @app.route("/getemp/results",methods=['GET','POST'])
 def Employee():
     emp_id = request.form['emp_id']
+   
     select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
 
     cursor = db_conn.cursor()
@@ -122,6 +123,13 @@ def deleteEmp():
 @app.route("/deleteemp/results",methods=['POST'])
 def deleteEmployee():
     emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    emp_image_file = request.files['emp_image_file']
+
+    full_name = "" + first_name + " " + last_name
     select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
     cursor = db_conn.cursor()
     cursor.execute(select_sql, {'emp_id': int(emp_id)})
@@ -152,7 +160,7 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html',result=result,image=s3_image_url) 
+    return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location,image=s3_image_url) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
