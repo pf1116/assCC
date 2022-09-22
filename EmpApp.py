@@ -126,13 +126,14 @@ def deleteEmployee():
     select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
     cursor = db_conn.cursor()
     cursor.execute(select_sql, {'emp_id': int(emp_id)})
-    delete_sql = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
+   
 
     result = cursor.fetchone()
     if(len(result)>0):
         full_name = result[1]+" "+result[2]
 
         try:
+            delete_sql = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
             cursor.execute(delete_sql, {'emp_id': int(emp_id)})
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
             
