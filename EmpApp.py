@@ -123,47 +123,33 @@ def deleteEmp():
 @app.route("/deleteemp/results",methods=['POST'])
 def deleteEmployee():
     emp_id = request.form['emp_id']
-    first_name = "N/A"
-    last_name = "N/A"
-    pri_skill = "N/A"
-    location = "N/A"
-    emp_image_file = None
-
-    full_name = "" + first_name + " " + last_name
+    
     select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
     cursor = db_conn.cursor()
     cursor.execute(select_sql, {'emp_id': int(emp_id)})
-
     delete_sql = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
 
-    if emp_id == "":
-        return "Please enter an ID to delete"
+    result = cursor.fetchone()
+    if(len(result)>0):
+        full_name = result[1]+" "+result[2]
 
-    try:
-        cursor.execute(delete_sql, {'emp_id': int(emp_id)})
+        try:
+            cursor.execute(delete_sql, {'emp_id': int(emp_id)})
+            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
+            
+            print("Data deleted from MySQL RDS... deleting image from S3...")
+            boto3.client('s3').delete_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
         
-        for row in cursor:
-            print(row)
+        except Exception as e:
+            return str(e)
 
-        db_conn.commit()
-
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
-        # s3_image_url = "https://limszeyi-employee.s3.amazonaws.com/"+emp_image_file_name_in_s3
-        s3 = boto3.resource('s3')
-        
-        print("Data deleted from MySQL RDS... deleting image from S3...")
-        boto3.client('s3').delete_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
-        
-        
-
-    except Exception as e:
-        return str(e)
-
-    finally:
+        finally:
+            cursor.close()
+        print("result done...")
+        return render_template('DeleteEmpOutput.html',name=full_name) 
+    else:
         cursor.close()
-
-    print("result done...")
-    return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location) 
+        return("Employee Not Found")
 
 
 if __name__ == '__main__':
