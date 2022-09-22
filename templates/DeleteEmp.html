@@ -11,10 +11,9 @@
             background-size: cover;
         }
     </style>
-    <title>Delete Emp Output</title>
+    <title>Delete Employee Information</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/emp.css') }}" />
 </head>
-
 
 <body>
     <section class="header">
@@ -29,41 +28,26 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row col-md-6 col-md-offset-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading text-center">
-                        <!-- <font color="black" size="4" style="font-family: avenir"> -->
-                        <h1>DELETE SUCCESSFUL</h1><br>
-                    </div>
-                    <div class="panel-body">
+            <form action="/getemp/results" autocomplete="on" method="POST">
+                <div class="row col-md-6 col-md-offset-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading text-center">
+                            <h1>Delete Employee Information</h1>
+                        </div>
+                        <div class="panel-body">
+                            <h2>Enter Employee ID</h2>
+                            Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id"
+                                autofocus size="40" min="1"><br><br>
 
-
-                        <h2>Following Employee has been deleted from the database</h2><br>
-                        <!--<h2>{{ id }}</h2><br> -->
-                        <form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
-
-                            <button type="submit" class="btn btn-primary">GO BACK</button><br><br>
-
-                        </form>
+                            <a href="/deleteemp/results">
+                                <button type="submit" class="btn btn-primary">Delete</button><br><br>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
-    <footer id="bottom">
-        <div class="footer-content">
-            <h3>CC Employee Management</h3>
-            <p>Welcome to our CC Employee Management</p>
-            <p>Copyright &copy;2022 CC Employee Management.</p>
-
-        </div>
-        <!-- <div class="footer-bottom">
-
-        </div> -->
-    </footer>
-
-
 </body>
-
 
 </html>
