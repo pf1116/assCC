@@ -123,13 +123,13 @@ def deleteEmp():
 @app.route("/deleteemp/results",methods=['POST'])
 def deleteEmployee():
     emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
-    emp_image_file = request.files['emp_image_file']
+    # first_name = "N/A"
+    # last_name = "N/A"
+    # pri_skill = "N/A"
+    # location = "N/A"
+    # emp_image_file = None
 
-    full_name = "" + first_name + " " + last_name
+    # full_name = "" + first_name + " " + last_name
     select_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
     cursor = db_conn.cursor()
     cursor.execute(select_sql, {'emp_id': int(emp_id)})
@@ -142,8 +142,8 @@ def deleteEmployee():
     try:
         cursor.execute(delete_sql, {'emp_id': int(emp_id)})
         
-        for result in cursor:
-            print(result)
+        for row in cursor:
+            print(row)
 
         db_conn.commit()
 
@@ -152,6 +152,8 @@ def deleteEmployee():
         
         print("Data deleted from MySQL RDS... deleting image from S3...")
         boto3.client('s3').delete_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
+        
+        
 
     except Exception as e:
         return str(e)
@@ -160,7 +162,8 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location,image=s3_image_url) 
+    # return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location,image=s3_image_url) 
+      return render_template('DeleteEmpOutput.html', result=result,image=s3_image_url)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
