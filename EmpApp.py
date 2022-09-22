@@ -148,7 +148,7 @@ def deleteEmployee():
         db_conn.commit()
 
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + ".jpg"
-         s3_image_url = "https://limszeyi-employee.s3.amazonaws.com/"+emp_image_file_name_in_s3
+        # s3_image_url = "https://limszeyi-employee.s3.amazonaws.com/"+emp_image_file_name_in_s3
         s3 = boto3.resource('s3')
         
         print("Data deleted from MySQL RDS... deleting image from S3...")
@@ -163,7 +163,7 @@ def deleteEmployee():
         cursor.close()
 
     print("result done...")
-    return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location,image=s3_image_url) 
+    return render_template('DeleteEmpOutput.html',id=emp_id, name=full_name,pri=pri_skill,location=location) 
 
 
 if __name__ == '__main__':
